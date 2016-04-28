@@ -11,8 +11,12 @@
 |
 */
 
+/**
+ * Task Dashboard
+ */
+
 Route::get('/', function () {
-    return view('welcome');
+    //TODO
 });
 
 
@@ -21,12 +25,12 @@ Route::get('/', function () {
  */
 
 Route::post('/task', function(Request $request){
-
+    //TODO
 });
 
 /**
  *  Delete a task
  */
 Route::delete('/task/{task}', function(Task $task){
-
+    //TODO
 });
