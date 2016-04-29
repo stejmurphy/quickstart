@@ -1,3 +1,3 @@
-#Laravel 5.2 To do list
+# Laravel Quickstart - Intermediate - Task List With Authentication
 
-Straight forward to do list built with laravel 5.2
+http://laravel.com/docs/quickstart-intermediate

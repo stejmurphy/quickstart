@@ -2,37 +2,36 @@
 
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Routes File
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
+| Here is where you will register all of the routes in an application.
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
 */
 
+/*
+|--------------------------------------------------------------------------
+| Application Routes
+|--------------------------------------------------------------------------
+|
+| This route group applies the "web" middleware group to every route
+| it contains. The "web" middleware group is defined in your HTTP
+| kernel and includes session state, CSRF protection, and more.
+|
+*/
 
-use App\Task;
-use Illuminate\Http\Request;
+Route::group(['middleware' => ['web']], function () {
 
-/**
- * Authentication Routes...
- */
+    Route::get('/', function () {
+        return view('welcome');
+    })->middleware('guest');
 
-Route::auth();
+    Route::get('/tasks', 'TaskController@index');
+    Route::post('/task', 'TaskController@store');
+    Route::delete('/task/{task}', 'TaskController@destroy');
 
+    Route::auth();
 
-/**
- * Show tasks
- */
-Route::get('/tasks', 'TaskController@index');
-
-/**
- *  Add task
- */
-Route::post('/task', 'TaskController@store');
-
-/**
- * Delete task
- */
-Route::delete('/task/{task}', 'TaskController@destroy');
+});
