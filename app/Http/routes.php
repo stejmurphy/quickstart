@@ -21,7 +21,23 @@ use Illuminate\Http\Request;
 
 Route::auth();
 
-Route::get('/home', 'HomeController@index');
+
+/**
+ * Show tasks
+ */
+Route::get('/tasks', 'TaskController@index');
+
+/**
+ *  Add task
+ */
+Route::post('/task', 'TaskController@store');
+
+/**
+ * Delete task
+ */
+Route::delete('/task/{task}', 'TaskController@destroy');
+
+
 
 /**
  * Task Dashboard
