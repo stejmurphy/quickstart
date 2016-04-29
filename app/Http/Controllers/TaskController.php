@@ -2,20 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 
+use App\Task;
+use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Repositories\TaskRepository;
 
 class TaskController extends Controller
 {
+
+	/**
+	 * The task repository instance
+	 *
+	 * @var TaskRepository
+	 */
+
+	protected $tasks;
+
 	/**
 	 * Create a new controller instance.
 	 *
+	 * @param TaskRepository $tasks
+	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(TaskRepository $tasks)
 	{
 		$this->middleware('auth');
+
+		$this->tasks = $tasks;
 	}
 
 	/**
@@ -26,7 +41,9 @@ class TaskController extends Controller
 	 */
 	public function index(Request $request)
 	{
-		return view('tasks.index');
+		return view('tasks.index', [
+			'tasks' => $this->tasks-forUser($request->user()),
+		]);
 	}
 
 	/**
@@ -46,6 +63,19 @@ class TaskController extends Controller
 		]);
 
 		return redirect('/tasks');
-		
+
+	}
+
+
+	/**
+	 * Destroy the given task.
+	 *
+	 * @param  Request  $request
+	 * @param  Task  $task
+	 * @return Response
+	 */
+	public function destroy(Request $request, Task $task)
+	{
+		//
 	}
 }
